@@ -4761,15 +4761,6 @@ void darwin::Link::ConstructJob(Compilation &C, const JobAction &JA,
   // we need to link in the C++ standard libraries.
   //
 
-  if (Args.hasArg(options::OPT_softbound)){
-    CmdArgs.push_back("-lsoftbound_rt");
-    CmdArgs.push_back("-lm");
-    if (!Args.hasArg(options::OPT_nostdlib) &&
-        !Args.hasArg(options::OPT_nodefaultlibs)) {
-      getToolChain().AddCXXStdlibLibArgs(Args, CmdArgs);
-    }
-  }
-
   const char *Exec =
     Args.MakeArgString(getToolChain().GetProgramPath("ld"));
   C.addCommand(new Command(JA, *this, Exec, CmdArgs));
@@ -5556,16 +5547,6 @@ void freebsd::Link::ConstructJob(Compilation &C, const JobAction &JA,
 
   AddLinkerInputs(ToolChain, Inputs, Args, CmdArgs);
 
- //
- // Add in any memory safety libraries.
- //
- if (Args.hasArg(options::OPT_softbound)){
-    CmdArgs.push_back("-lsoftbound_rt");
-    CmdArgs.push_back("-lstdc++");
-    CmdArgs.push_back("-lrt");
-    CmdArgs.push_back("-lm");
-  }
-
   if (!Args.hasArg(options::OPT_nostdlib) &&
       !Args.hasArg(options::OPT_nodefaultlibs)) {
     if (D.CCCIsCXX) {
@@ -6188,15 +6169,6 @@ void gnutools::Link::ConstructJob(Compilation &C, const JobAction &JA,
   }
 
   addProfileRT(getToolChain(), Args, CmdArgs, getToolChain().getTriple());
-
-  // Add in any memory safety libraries.
-  //
-  if (Args.hasArg(options::OPT_softbound)){
-    CmdArgs.push_back("-lsoftbound_rt");
-    CmdArgs.push_back("-lrt");
-    CmdArgs.push_back("-lm");
-    CmdArgs.push_back("-lstdc++");
-  }
 
   C.addCommand(new Command(JA, *this, ToolChain.Linker.c_str(), CmdArgs));
 }

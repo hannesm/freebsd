@@ -84,7 +84,7 @@ SDT_PROBE_DEFINE5_XLATE(tcp, , , connect__refused,
 SDT_PROBE_DEFINE5_XLATE(tcp, , , connect__request,
     "void *", "pktinfo_t *",
     "struct tcpcb *", "csinfo_t *",
-    "uint8_t *", "ipinfo_t *",
+    "struct mbuf *", "ipinfo_t *",
     "struct tcpcb *", "tcpsinfo_t *" ,
     "struct tcphdr *", "tcpinfo_t *");
 
@@ -98,7 +98,7 @@ SDT_PROBE_DEFINE5_XLATE(tcp, , , receive,
 SDT_PROBE_DEFINE5_XLATE(tcp, , , send,
     "void *", "pktinfo_t *",
     "struct tcpcb *", "csinfo_t *",
-    "uint8_t *", "ipinfo_t *",
+    "struct mbuf *", "ipinfo_t *",
     "struct tcpcb *", "tcpsinfo_t *" ,
     "struct tcphdr *", "tcpinfo_t *");
 
@@ -108,7 +108,7 @@ SDT_PROBE_DEFINE1_XLATE(tcp, , , siftr,
 SDT_PROBE_DEFINE3_XLATE(tcp, , , debug__input,
     "struct tcpcb *", "tcpsinfo_t *" ,
     "struct tcphdr *", "tcpinfo_t *",
-    "uint8_t *", "ipinfo_t *");
+    "struct mbuf *", "ipinfo_t *");
 
 SDT_PROBE_DEFINE3_XLATE(tcp, , , debug__output,
     "struct tcpcb *", "tcpsinfo_t *" ,
@@ -135,13 +135,13 @@ SDT_PROBE_DEFINE6_XLATE(tcp, , , state__change,
 SDT_PROBE_DEFINE5_XLATE(udp, , , receive,
     "void *", "pktinfo_t *",
     "struct inpcb *", "csinfo_t *",
-    "uint8_t *", "ipinfo_t *",
+    "struct mbuf *", "ipinfo_t *",
     "struct inpcb *", "udpsinfo_t *",
     "struct udphdr *", "udpinfo_t *");
 
 SDT_PROBE_DEFINE5_XLATE(udp, , , send,
     "void *", "pktinfo_t *",
     "struct inpcb *", "csinfo_t *",
-    "uint8_t *", "ipinfo_t *",
+    "struct mbuf *", "ipinfo_t *",
     "struct inpcb *", "udpsinfo_t *",
     "struct udphdr *", "udpinfo_t *");

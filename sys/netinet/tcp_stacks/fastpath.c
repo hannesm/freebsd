@@ -630,6 +630,7 @@ tcp_do_slowpath(struct mbuf *m, struct tcphdr *th, struct socket *so,
 				cc_conn_init(tp);
 				tcp_timer_activate(tp, TT_KEEP,
 				    TP_KEEPIDLE(tp));
+				TCP_PROBE2(debug__user, tp, 0);
 			}
 		} else {
 			/*
@@ -1000,6 +1001,7 @@ tcp_do_slowpath(struct mbuf *m, struct tcphdr *th, struct socket *so,
 			    m, tp, th);
 			cc_conn_init(tp);
 			tcp_timer_activate(tp, TT_KEEP, TP_KEEPIDLE(tp));
+                        TCP_PROBE2(debug__user, tp, 0);
 		}
 		/*
 		 * If segment contains data or ACK, will call tcp_reass()

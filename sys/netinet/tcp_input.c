@@ -2066,6 +2066,7 @@ tcp_do_segment(struct mbuf *m, struct tcphdr *th, struct socket *so,
 				cc_conn_init(tp);
 				tcp_timer_activate(tp, TT_KEEP,
 				    TP_KEEPIDLE(tp));
+				TCP_PROBE2(debug__user, tp, 0);
 			}
 		} else {
 			/*
@@ -2401,6 +2402,7 @@ tcp_do_segment(struct mbuf *m, struct tcphdr *th, struct socket *so,
 			    IS_FASTOPEN(tp->t_flags)) {
 				tp->snd_wnd = tiwin;
 				cc_conn_init(tp);
+				TCP_PROBE2(debug__user, tp, 0);
 			}
 #endif
 			goto step6;
@@ -2465,6 +2467,7 @@ tcp_do_segment(struct mbuf *m, struct tcphdr *th, struct socket *so,
 #endif
 				cc_conn_init(tp);
 			tcp_timer_activate(tp, TT_KEEP, TP_KEEPIDLE(tp));
+                        TCP_PROBE2(debug__user, tp, 0);
 		}
 		/*
 		 * If segment contains data or ACK, will call tcp_reass()
